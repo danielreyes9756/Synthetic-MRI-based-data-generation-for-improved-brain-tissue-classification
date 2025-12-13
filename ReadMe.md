@@ -179,6 +179,7 @@ By ``train_eval_test_nnunet.py``
     - results
 ```
 
+
 ### Notes:
 ``lab2im_generate.py`` the number of synthetic images generated per case is controlled by the variables ``n_images_train`` and ``n_images_test``, as well as the constant ``N_IMAGES_FSLFAST_HDBET``. These values are defined in the ``if __name__ == "__main__":`` block and can be easily modified by the user to change the size of the training or testing datasets.
 
