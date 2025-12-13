@@ -103,6 +103,8 @@ From each synthesized volume, the central axial slice is extracted, padded to **
 
 Each combination of **(segmentation method × skull-stripping method)** results in a distinct synthetic dataset.
 
+At this point labels are also remapped to have only 4 possible values {0: background, 1: GM, 2: WM, 3: CSF}
+
 ![lab2im case](figures/lab2im-case.png)
 
 ---
