@@ -170,6 +170,7 @@ dependencies:
       - tensorflow-io-gcs-filesystem==0.31.0
       - termcolor==3.2.0
       - threadpoolctl==3.6.0
+      - tqdm==4.67.1
       - typeguard==2.13.3
       - tzdata==2025.2
       - urllib3==2.6.1
