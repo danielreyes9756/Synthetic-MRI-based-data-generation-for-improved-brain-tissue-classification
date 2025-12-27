@@ -45,13 +45,13 @@ After skull-stripping, images undergo:
 
 - intensity normalization
 - automatic bounding-box computation
-- cropping to remove non-brain background
+- cropping to center image
 
 This ensures consistent spatial support across subjects.
 
 ---
 
-## 2. Tissue Segmentation and Label Harmonization
+## 2. Tissue Segmentation
 
 Each preprocessed image is segmented using four different tools:
 
@@ -68,17 +68,10 @@ Each preprocessed image is segmented using four different tools:
     ![seg by SynthSeg and HD-Bet](figures/seg_SynthSeg_hdbet_01.png)
     ![seg by SynthSeg and SynthStrip](figures/seg_SynthSeg_synthstrip_01.png)
 
-Since these tools produce heterogeneous anatomical label sets, all outputs are remapped into a unified tissue representation:
-
-- **Gray Matter (GM)**
-- **White Matter (WM)**
-- **Cerebrospinal Fluid (CSF)**
-
-This harmonization enables fair comparison across segmentation methods.
 
 ---
 
-## 3. Synthetic Data Generation
+## 3. Synthetic Data Generation and Label Harmonization
 
 Synthetic MRI images are generated from the simplified tissue maps using **lab2im** [1].
 
@@ -91,7 +84,7 @@ Lab2im generates anatomically plausible MRI images by sampling tissue-specific i
 
 To increase realism and variability, the following transformations are applied:
 
-- random spatial deformations
+- **Random Spatial Deformations:** Geometric modifications are applied to the images, such as local displacements or stretching of brain regions. This simulates anatomical variability between subjects and encourages the model to generalize beyond the specific shapes of the original data
 - intensity augmentation
 - Gaussian blur
 - bias field corruption
@@ -106,6 +99,14 @@ Each combination of **(segmentation method × skull-stripping method)** results 
 At this point labels are also remapped to have only 4 possible values {0: background, 1: GM, 2: WM, 3: CSF}
 
 ![lab2im case](figures/lab2im-case.png)
+
+
+Labels are remapped to have only four possible values: 0: background, 1: GM, 2: WM, 3: CSF}. This harmonization ensures fair comparison across segmentation methods, which originally produce heterogeneous anatomical label sets (except for FSL FAST, that only switches GM labels with CSF labels for consistency).
+
+To remap this labels the following information has been used!
+- [FreeSurferColorLUT](https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT)
+- [freesurfer mail archive](https://www.mail-archive.com/freesurfer@nmr.mgh.harvard.edu/msg67731.html)
+
 
 ---
 
